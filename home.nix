@@ -43,7 +43,6 @@ in {
     (caelestia-shell.packages.${system}.default.override { withCli = true; })
     caelestia-cli.packages.${system}.default
     better-control.packages.${system}.default
-    zen-browser.packages."${system}".specific
     # fonts
     minecraftia
   ];
@@ -107,7 +106,7 @@ in {
 
   # Session variables
   home.sessionVariables = {
-    QT_STYLE_OVERRIDE = "kvantum";
+    QT_STYLE_OVERRIDE = "Fusion";
     QT_QPA_PLATFORMTHEME = "kvantum";
     XCURSOR_THEME = "Bibata-Modern-Ice";
     XCURSOR_SIZE = "24";
