@@ -134,7 +134,7 @@ in {
 
   # Session variables
   home.sessionVariables = {
-    QT_STYLE_OVERRIDE = "Fusion";
+    QT_STYLE_OVERRIDE = "kvantum";
     QT_QPA_PLATFORMTHEME = "kvantum";
     XCURSOR_THEME = "Bibata-Modern-Ice";
     XCURSOR_SIZE = "24";
