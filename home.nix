@@ -56,7 +56,6 @@ in {
     libsForQt5.qtstyleplugin-kvantum
 
     # Fun
-    whatsie
     prismlauncher
     vesktop
 
