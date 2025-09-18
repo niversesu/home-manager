@@ -20,37 +20,45 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, spicetify-nix, caelestia-shell, caelestia-cli, better-control, nix-minecraft, ... }:
-    let
-      system = "x86_64-linux";
-    in {
-      # ✅ NixOS system configuration (for nixos-rebuild)
-      nixosConfigurations.niver = nixpkgs.lib.nixosSystem {
-        inherit system;
-	inherit nix-minecraft;
-        modules = [
-          ./configuration.nix
-          ./minecraft.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.niver = import ./home.nix;
-          }
-        ];
-      };
-
-      # ✅ Home Manager standalone config (for home-manager switch)
-      homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        extraSpecialArgs = {
-          inherit spicetify-nix caelestia-shell caelestia-cli better-control nix-minecraft;
-        };
-        modules = [
-          spicetify-nix.homeManagerModules.default
-          ./home.nix
-        ];
-      };
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    spicetify-nix,
+    caelestia-shell,
+    caelestia-cli,
+    better-control,
+    nix-minecraft,
+    ...
+  }: let
+    system = "x86_64-linux";
+  in {
+    # ✅ NixOS system configuration (for nixos-rebuild)
+    nixosConfigurations.niver = nixpkgs.lib.nixosSystem {
+      inherit system;
+      inherit nix-minecraft;
+      modules = [
+        ./configuration.nix
+        ./minecraft.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.niver = import ./home.nix;
+        }
+      ];
     };
-}
 
+    # ✅ Home Manager standalone config (for home-manager switch)
+    homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.${system};
+      extraSpecialArgs = {
+        inherit spicetify-nix caelestia-shell caelestia-cli better-control nix-minecraft;
+      };
+      modules = [
+        spicetify-nix.homeManagerModules.default
+        ./home.nix
+      ];
+    };
+  };
+}

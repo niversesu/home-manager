@@ -1,6 +1,12 @@
-{ config, pkgs, spicetify-nix, caelestia-shell, caelestia-cli, better-control, ... }:
-
-let
+{
+  config,
+  pkgs,
+  spicetify-nix,
+  caelestia-shell,
+  caelestia-cli,
+  better-control,
+  ...
+}: let
   system = pkgs.stdenv.hostPlatform.system;
   spicePkgs = spicetify-nix.legacyPackages.${system};
 in {
@@ -16,31 +22,50 @@ in {
 
   # Nixpkgs
   nixpkgs.config = {
-  allowUnfree = true;
-  permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
+    allowUnfree = true;
+    permittedInsecurePackages = ["qtwebengine-5.15.19"];
   };
 
   # Packages
   home.packages = with pkgs; [
     # Tools
-    atool httpie eza fastfetch ripgrep cliphist fuzzel kdePackages.filelight 
+    atool
+    httpie
+    eza
+    fastfetch
+    ripgrep
+    cliphist
+    fuzzel
+    kdePackages.filelight
 
     # Multimedia
-    mpv celluloid gnome-sound-recorder qpwgraph lyrebird gnome-font-viewer
+    mpv
+    celluloid
+    gnome-sound-recorder
+    qpwgraph
+    lyrebird
+    gnome-font-viewer
 
     # Theming
-    whitesur-icon-theme adwaita-icon-theme adwaita-qt
-    gimp3-with-plugins nwg-look
-    libsForQt5.qt5ct libsForQt5.qtstyleplugin-kvantum
+    whitesur-icon-theme
+    adwaita-icon-theme
+    adwaita-qt
+    gimp3-with-plugins
+    nwg-look
+    libsForQt5.qt5ct
+    libsForQt5.qtstyleplugin-kvantum
 
     # Fun
-    whatsie prismlauncher vesktop 
+    whatsie
+    prismlauncher
+    vesktop
 
     # misc
-    wine-wayland winetricks
+    wine-wayland
+    winetricks
 
     # Custom flakes
-    (caelestia-shell.packages.${system}.default.override { withCli = true; })
+    (caelestia-shell.packages.${system}.default.override {withCli = true;})
     caelestia-cli.packages.${system}.default
     better-control.packages.${system}.default
     # fonts
@@ -87,15 +112,19 @@ in {
     };
 
     git = {
-     enable = true;
-      userName  = "niversesu";
+      enable = true;
+      userName = "niversesu";
       userEmail = "niversesu@gmail.com";
     };
 
     spicetify = {
       enable = true;
       enabledExtensions = with spicePkgs.extensions; [
-        adblock hidePodcasts shuffle simpleBeautifulLyrics bestMoment
+        adblock
+        hidePodcasts
+        shuffle
+        simpleBeautifulLyrics
+        bestMoment
       ];
       theme = spicePkgs.themes.hazy;
     };
@@ -111,6 +140,4 @@ in {
     XCURSOR_THEME = "Bibata-Modern-Ice";
     XCURSOR_SIZE = "24";
   };
-
 }
-
