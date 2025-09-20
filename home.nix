@@ -37,6 +37,7 @@ in {
     cliphist
     fuzzel
     kdePackages.filelight
+    ventoy-full-qt
 
     # Multimedia
     mpv
